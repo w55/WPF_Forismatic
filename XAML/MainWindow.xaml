@@ -1,0 +1,307 @@
+﻿<Window x:Class="MyWpfForismatic.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyWpfForismatic"
+        mc:Ignorable="d"
+        
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        
+        Title="My Wpf Forismatic" Height="320" Width="200" WindowStartupLocation="Manual" Loaded="Window_Loaded" ResizeMode="NoResize" Icon="black-decision-64.ico" AllowsTransparency="True" WindowStyle="None" Background="Transparent" >
+    <Window.Resources>
+
+        <!-- Path animation - PathGeometry  -->
+        <PathGeometry x:Key="geometryPath">
+            <PathFigure IsClosed="True" StartPoint="0, 0" >
+                <PolyLineSegment Points="178,0   178,298   0,298" />
+            </PathFigure>
+        </PathGeometry>
+
+        <!-- Path animation - Storyboard  -->
+        <Storyboard x:Key="story5" Storyboard.TargetName="ball5" >
+            <DoubleAnimationUsingPath
+                Storyboard.TargetProperty="(Canvas.Top)"
+                Duration="0:0:5" RepeatBehavior="1x"
+                PathGeometry="{DynamicResource geometryPath}" Source="Y" />
+            <DoubleAnimationUsingPath
+                Storyboard.TargetProperty="(Canvas.Left)"
+                Duration="0:0:5" RepeatBehavior="1x"
+                PathGeometry="{DynamicResource geometryPath}" Source="X" />
+        </Storyboard>
+
+        <!-- Transparency property of main window -->
+        <sys:Double x:Key="IsTransparencyOn">0</sys:Double>
+        <sys:Double x:Key="IsTransparencyOff">24</sys:Double>
+
+        <!-- Topmost property of main window -->
+        <sys:Double x:Key="IsTopMostOn">0</sys:Double>
+        <sys:Double x:Key="IsTopMostOff">24</sys:Double>
+
+        <sys:Double x:Key="ImageButtonsWidth">24</sys:Double>
+        <sys:Double x:Key="PlayButtonsWidth">0</sys:Double>
+        <sys:Double x:Key="PauseButtonsWidth">24</sys:Double>
+
+        <sys:String x:Key="VolumePopupText">10</sys:String>
+
+        <SolidColorBrush x:Key="redStyle" Color="Red" />
+        <SolidColorBrush x:Key="limeStyle" Color="Lime" />
+        <SolidColorBrush x:Key="blackTransStyle" Color="Black" Opacity="0.22" />
+        <SolidColorBrush x:Key="blackTransStyle2" Color="Black" Opacity="0.02" />
+
+        <!-- My Circle ProgressBar -->
+        <!--<local:DoubleToPctConverter x:Key="dblToPct"/>-->
+        <sys:String x:Key="LeftTimeText">0:05</sys:String>
+
+        <Style x:Key="pbarCircularStyle" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Foreground" Value="#D30000"/>
+            <Setter Property="Maximum" Value="100"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Grid x:Name="TemplateRoot" SnapsToDevicePixels="true">
+                            <!-- text for percentage  -->
+                            <!--<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Consolas" 
+                                   FontSize="16" Foreground="Lime" 
+                                   Text="{TemplateBinding Value, Converter={StaticResource dblToPct}}" >
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                                </TextBlock.Effect>
+                            </TextBlock>-->
+
+                            <!-- Left Time text -->
+                            <!-- text for percentage  -->
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Consolas" 
+                                   FontSize="15"  Foreground="Lime" 
+                                   Text="{DynamicResource LeftTimeText}" >
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+
+                            <!--- my addition: ellipse for progressbar background -->
+                            <Ellipse Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" Stroke="DarkGray" StrokeThickness="1" Fill="Transparent" Opacity="0.5" >
+                                <Ellipse.Effect>
+                                    <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                                </Ellipse.Effect>
+                            </Ellipse>
+
+                            <!-- here is my circle progressbar -->
+                            <!--<local:CircularProgress Stroke="{TemplateBinding Foreground}"
+                                              Value="{TemplateBinding Value}" />-->
+                            <local:CircularProgress Stroke="{TemplateBinding Foreground}"
+                                              Value="{TemplateBinding Value}" >
+                                <local:CircularProgress.Effect>
+                                    <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                                </local:CircularProgress.Effect>
+                            </local:CircularProgress>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid  x:Name="gridMain" Margin="0.33" Background="Transparent" >
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="rowThought" Height="*" />
+            <RowDefinition x:Name="rowAuthor" Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Canvas x:Name="canvasThought" Panel.ZIndex="9" Grid.Row="0" Grid.RowSpan="2" Margin="3" Background="Black" >
+
+            <!-- Path animation  -->
+            <Path x:Name="pathForBall" Stroke="DarkGray" StrokeThickness="1" Data="{StaticResource geometryPath}" 
+                  Canvas.Top="8" Canvas.Left="8" StrokeDashArray="6 2" Opacity="0.4" >
+                <!--<Path.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                </Path.Effect>-->
+            </Path>
+
+            <Ellipse x:Name="ball5" Panel.ZIndex="30" Cursor="Hand" Width="16" Height="16" Stroke="Brown" Canvas.Top="0" Canvas.Left="0">
+                <Ellipse.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                </Ellipse.Effect>
+                <Ellipse.Fill>
+                    <RadialGradientBrush RadiusX="1" RadiusY="1" GradientOrigin="0.35, 0.35">
+                        <GradientStop Color="Yellow" Offset="0.05" />
+                        <GradientStop Color="Red" Offset="0.55" />
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <!-- Result of adding record to SqlServer  Visibility="Collapsed" -->
+
+            <!-- Thought  -->
+            <Border x:Name="borderThought" BorderBrush="Black" BorderThickness="1" Width="170"  MaxHeight="246"
+                       Canvas.Top="12" Canvas.Left="12">
+                <TextBlock x:Name="txtThought" Foreground="Lime" TextWrapping="Wrap" 
+                       FontSize="14" TextBlock.TextAlignment="Center"                       
+                       Cursor="Hand" MouseLeftButtonUp="txtThought_MouseLeftButtonUp"
+                       MouseEnter="txtThought_MouseEnter" MouseLeave="txtThought_MouseLeave"
+                       Text="--- No Thought ---">
+                </TextBlock>
+            </Border>
+
+            <!-- Popup text - to show that click will Add this thought to server     Visibility="Collapsed" -->
+            <Label x:Name="lblAddThought" Content="Add Thought" Foreground="Salmon" Margin="8" FontSize="12"                   
+                   Canvas.Right="0"  Canvas.Top="{Binding ElementName=borderThought, Path=ActualHeight}" />
+
+            <!-- Popup text - to show that click will Show this Author thoughts   Visibility="Collapsed"   -->
+            <Label x:Name="lblShowThoughts" Content="Show Thoughts" Foreground="Salmon" Margin="6" FontSize="12"
+                   Visibility="Collapsed"
+                   Canvas.Left="4"  Canvas.Bottom="{Binding ElementName=borderAuthor, Path=ActualHeight}" />
+        </Canvas>
+
+
+
+        <StackPanel Grid.Row="1"  Background="{StaticResource blackTransStyle2}" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Panel.ZIndex="10" Margin="6">
+
+            <!-- Author -->
+            <Border x:Name="borderAuthor" BorderBrush="Transparent" BorderThickness="1" Width="124" Margin="8 0 4 0" 
+                   MinHeight="36" Height="{Binding ElementName=txtAuthor,Path=ActualHeight}" >
+                <TextBlock x:Name="txtAuthor"  Foreground="Yellow" TextWrapping="Wrap"
+                       FontSize="14"  VerticalAlignment="Center"  TextAlignment="Center"
+                       Cursor="Hand" MouseLeftButtonUp="txtAuthor_MouseLeftButtonUp" 
+                       MouseEnter="txtAuthor_MouseEnter" MouseLeave="txtAuthor_MouseLeave"
+                       Text="--- No Author ---"/>
+            </Border>
+
+            <!-- Time to switching -->
+            <Grid>
+                <ProgressBar Style="{DynamicResource pbarCircularStyle}" Cursor="Hand"
+                     Value="{Binding PctComplete}" MouseEnter="question_MouseEnter" MouseLeftButtonDown="question_MouseLeftButtonDown" MouseRightButtonDown="question_MouseRightButtonDown" />
+            </Grid>
+        </StackPanel>
+
+        <!-- Popup popVideoControls -->
+        <Popup Name="popVideoControls" StaysOpen="False" Placement="Mouse" HorizontalOffset="-20" VerticalOffset="-80"
+               AllowsTransparency="True"  Opacity="0.75" PopupAnimation="Scroll" ClipToBounds="True" SnapsToDevicePixels="True" >
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <!-- Margin="2 1 1 1" -->
+                    <Button Click="btnOpenDb_Click" Margin="1" Cursor="Hand">
+                        <Image Source="pics/folder_open.png" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+
+                    <!-- Margin="2 1 1 1" -->
+                    <Button Click="btnAddRecordToDb_Click" Margin="1" Cursor="Hand">
+                        <Image Source="pics/hme_scrn.jpg" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+
+
+
+
+                    <Button Click="btnSettings_Click" Margin="10 1 1 1"  Cursor="Hand">
+                        <Image Source="pics/pause_001.jpg" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+
+                    <!-- Topmost property of main window -->
+                    <Button Click="btnTopMost_On_Click" Margin="10 1 1 1" Cursor="Hand" Width="{DynamicResource IsTopMostOff}" >
+                        <Image Source="pics/pin_0004.fw.png" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+                    <Button Click="btnTopMost_Off_Click" Margin="1" Cursor="Hand" Width="{DynamicResource IsTopMostOn}" >
+                        <Image Source="pics/pin_0002.fw.png" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+
+                    <Button Click="btnExit_Click" Margin="1" Cursor="Hand">
+                        <Image Source="pics/stop_01.jpg" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+                </StackPanel>
+
+                <Line Height="5"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button Click="btnPlay_Click" Cursor="Hand" Width="{DynamicResource PlayButtonsWidth}" >
+                        <Image Source="pics/play_001.jpg" Margin="1" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+                    <Button Click="btnPause_Click" Margin="1" Cursor="Hand" Width="{DynamicResource PauseButtonsWidth}" >
+                        <Image Source="pics/pause_icon.jpg" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+                    <!--<Button Click="btnStop_Click" Margin="1" Cursor="Hand" Width="{DynamicResource ImageButtonsWidth}" >
+                        <Image x:Name="imgStop" Source="pics/pause_01.jpg" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>-->
+                    <!--<Button x:Name="btnDelete" Click="btnDelete_Click" Margin="1" Cursor="Hand" Width="{DynamicResource VideoButtonsWidth}" >
+                        <Image Source="pics/gone_icon.png" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>-->
+
+                    <Button Click="btnPrev_Click" Margin="1" Cursor="Hand" >
+                        <Image x:Name="imgBack0" Source="pics/left-arrow.png"  Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+
+                    <!-- Transparency property of main window -->
+                    <Button Click="btnTransparencyOn_Click" Margin="10 1 1 1" Cursor="Hand" Width="{DynamicResource IsTransparencyOff}" >
+                        <Image Source="pics/trans_06.fw.png" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+                    <Button Click="btnTransparencyOff_Click" Margin="1" Cursor="Hand" Width="{DynamicResource IsTransparencyOn}" >
+                        <Image Source="pics/trans_05.fw.png" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+
+
+
+                    <!--   Volume Down & Up Block-->
+                    <Button Click="btnVolumeDown_Click" Margin="11 1 1 1" Cursor="Hand" >
+                        <Image Source="pics/minus_01.jpg" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+                    <Label x:Name="textPopupVolume" Width="36" Content="{DynamicResource VolumePopupText}" Margin="1"  Background="Black" Foreground="Lime" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="12" FontFamily="Consolas"/>
+                    <Button Click="btnVolumeUp_Click" Margin="1" Cursor="Hand" >
+                        <Image Source="pics/plus_01.jpg" Height="20"/>
+                        <Button.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="2"/>
+                        </Button.Effect>
+                    </Button>
+
+
+                </StackPanel>
+            </StackPanel>
+        </Popup>
+
+
+    </Grid>
+</Window>
