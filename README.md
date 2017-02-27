@@ -11,8 +11,7 @@ Code:
 	<li><a href="Code/frmSettings.xaml.cs">frmSettings.xaml.cs</a>,</li>
 	<li><a href="Code/frmThoughts.xaml.cs">frmThoughts.xaml.cs</a>,</li>
 	<li><a href="Code/MainWindow.xaml.cs">MainWindow.xaml.cs</a>,</li>
-	<li><a href="Code/ThoughtsRepository.cs">ThoughtsRepository.cs</a>,</li>
-	<li><a href="Code/TreeViewLineConverter.cs">TreeViewLineConverter.cs</a>,</li>
+	<li><a href="Code/TreeViewLineConverter.cs">TreeViewLineConverter.cs</a>.</li>
 	<li><a href="Code/Utils.cs">Utils.cs</a>,</li>
 </ul>
 
