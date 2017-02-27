@@ -26,9 +26,11 @@ XAML:
 <hr>
 Here are main, thoughts and setting windows screenshots:
 <br>
-<img width="160" src="Screenshots/main_window.jpg" alt="main_window.jpg" />
-<img width="160" src="Screenshots/main_window_2.jpg" alt="main_window_2.jpg" />
-<img width="460" src="Screenshots/thoughts_window.jpg" alt="thoughts_window.jpg" />
+<img width="240" src="Screenshots/main_window.jpg" alt="main_window.jpg" />
+<img width="240" src="Screenshots/main_window_2.jpg" alt="main_window_2.jpg" />
+<br>
+<img width="660" src="Screenshots/thoughts_window.jpg" alt="thoughts_window.jpg" />
+<br>
 <img width="460" src="Screenshots/settings_window.jpg" alt="settings_window.jpg" />
 
 <hr>
