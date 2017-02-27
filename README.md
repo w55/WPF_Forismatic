@@ -26,12 +26,12 @@ XAML:
 <hr>
 Here are main, thoughts and setting windows screenshots:
 <br>
-<img width="240" src="Screenshots/main_window.jpg" alt="main_window.jpg" />
-<img width="240" src="Screenshots/main_window_2.jpg" alt="main_window_2.jpg" />
+<img width="200" src="Screenshots/main_window.jpg" alt="main_window.jpg" />
+<img width="200" src="Screenshots/main_window_2.jpg" alt="main_window_2.jpg" />
 <br>
-<img width="660" src="Screenshots/thoughts_window.jpg" alt="thoughts_window.jpg" />
+<img width="760" src="Screenshots/thoughts_window.jpg" alt="thoughts_window.jpg" />
 <br>
-<img width="460" src="Screenshots/settings_window.jpg" alt="settings_window.jpg" />
+<img width="360" src="Screenshots/settings_window.jpg" alt="settings_window.jpg" />
 
 <hr>
 Here is corresponding thought from firismatic site, opened by clicking link at thought window:
