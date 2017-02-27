@@ -34,7 +34,7 @@ Here are main, thoughts and setting windows screenshots:
 <img width="360" src="Screenshots/settings_window.jpg" alt="settings_window.jpg" />
 
 <hr>
-Here is corresponding thought from <a href="www.forismatic.com">forismatic.com</a>, opened by clicking link at thought window:
+Here is corresponding thought from <a href="http://www.forismatic.com">forismatic.com</a>, opened by clicking link at thought window:
 <br>
 <img width="460" src="Screenshots/forismatic_site.jpg" alt="forismatic_site.jpg" />
 
